@@ -23,3 +23,13 @@ for c in cols:
 print("\nMissing values:")
 print(df[cols].isnull().sum())
 
+# Baseline Win Rate
+print("\n---Baseline Win Rates ---")
+
+# Count raw total outcomes of winner column
+print("Value counts for winner")
+print(df['winner'].value_counts())
+
+#Calculate % breakdown of total wins
+print("\nPercentage breakdown:")
+print(df['winner'].value_counts(normalize=True) * 100)
