@@ -33,3 +33,20 @@ print(df['winner'].value_counts())
 #Calculate % breakdown of total wins
 print("\nPercentage breakdown:")
 print(df['winner'].value_counts(normalize=True) * 100)
+
+
+#Naive Win Rate 
+print('\n--- Naive Win Rates By Opening ---')
+
+#Filter rare openings
+opening_counts = df['opening_name'].value_counts()
+common_openings = opening_counts[opening_counts >= 50].index
+
+#Calculating White win rate per opening
+naive = df[df['opening_name'].isin(common_openings)].groupby('opening_name').apply(
+    lambda g: (g['winner'] == 'white').mean()
+).sort_values(ascending=False)
+
+# Display t10 openings
+print("Top 10 openings by White win rate:")
+print(naive.head(10))
