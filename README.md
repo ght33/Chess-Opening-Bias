@@ -11,3 +11,5 @@ Ingestion and Profiling: Loading raw CSV, checking how many columns we have (sho
 Baseline Win Rates: Calculating raw win, loss, and draw counts to see the basic breakdown for White vs. Black. Calculated distribution as a baseline to measure against calculated raw opening win rates to highlight how unadjusted statistics ignore player skill level.
 
 Performance over expectation (POE): Applied ELO rating formula to calculate the expected game outcomes based on rating differences in order to isolate true opening advantage by removing player skill bias.
+
+Predictive Modeling: Built a logistic regression classifier in sklearn using rating difference and one-hot encoded openings to test whether opening choice helps predict game outcomes on unseen data.

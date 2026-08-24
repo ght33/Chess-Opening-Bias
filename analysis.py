@@ -1,5 +1,8 @@
-import kagglehub    
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import kagglehub
 
 #Fetching Kaggle Lichess game data
 print('Loading games.csv...')
@@ -64,7 +67,7 @@ df['expected_white_win'] = 1 / (1 + 10 ** (-df['rating_diff'] / 400))
 #Calculating actual win
 df['white_won'] = (df['winner'] == 'white').astype(int)
 
-#Preformance over expectation (POE0) per game 
+#Preformance over expectation (POE) per game 
 df['poe'] = df['white_won'] - df['expected_white_win']
 
 #Aggregate by opening to find true opening advantage
@@ -76,3 +79,27 @@ adjusted = (
     )
 print('\nTope 10 Openings by Preformance Over Expectation POE:')
 print(adjusted.head(10))
+
+
+#Predictive Modeling (Logistic Regression)
+
+#Filter common openings 
+df_ml = df[df['opening_name'].isin(common_openings)].copy()
+
+#Features & target
+X = pd.get_dummies(df_ml[['rating_diff', 'opening_name']], columns=['opening_name'], drop_first=True)
+y = df_ml['white_won']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#Train regression
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+#Output evaluation
+y_pred = model.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
+
+print("\n--- Model Evaluation---")
+print(f"Logistic Regression Accuracy: {acc:.4f}")
+
