@@ -13,3 +13,5 @@ Baseline Win Rates: Calculating raw win, loss, and draw counts to see the basic 
 Performance over expectation (POE): Applied ELO rating formula to calculate the expected game outcomes based on rating differences in order to isolate true opening advantage by removing player skill bias.
 
 Predictive Modeling: Built a logistic regression classifier in sklearn using rating difference and one-hot encoded openings to test whether opening choice helps predict game outcomes on unseen data.
+
+Dashboard Visualization: Built an interactive Streamlit application (app.py) to let users filter openings by minimum games played and analyze top performance metrics dynamically.
