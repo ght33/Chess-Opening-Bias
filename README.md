@@ -15,3 +15,18 @@ Performance over expectation (POE): Applied ELO rating formula to calculate the 
 Predictive Modeling: Built a logistic regression classifier in sklearn using rating difference and one-hot encoded openings to test whether opening choice helps predict game outcomes on unseen data.
 
 Dashboard Visualization: Built an interactive Streamlit application (app.py) to let users filter openings by minimum games played and analyze top performance metrics dynamically.
+
+# Key Findings & Results
+Analysis of 20,058 games from the Lichess dataset yields the following results:
+
+Baseline Win Distribution: White wins 49.86% of games, Black wins 45.40%, and 4.74% end in draws.
+
+Naive Win Rates vs. POE Differences:
+
+Openings with high raw White win rates (like Zukertort Opening: Queen's Gambit Invitation at 69.81%) drop in true rank once adjusted for player ratings.
+
+Scandinavian Defense: Main Line achieves the highest Performance Over Expectation (+0.1586 POE across 62 games), showing White outperforms Elo expectations by ~15.86 percentage points.
+
+Other top performers include King's Pawn Game: Busch-Gass Gambit (+0.1534 POE) and Nimzowitsch Defense: Kennedy Variation (+0.1113 POE).
+
+Predictive Power: Incorporating one-hot encoded opening selection alongside rating differentials yields a 63.76% classification accuracy in predicting game outcomes with Logistic Regression.
